@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <ItemGroup>
+    <ProjectReference Include="..\Paddock.ServiceDefaults\Paddock.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\BuildingBlocks\Paddock.BuildingBlocks\Paddock.BuildingBlocks.csproj" />
+  </ItemGroup>
+
+  <!-- L'hôte assemble les modules : il ne référence que leur implémentation, jamais leur DbContext. -->
+  <ItemGroup>
+    <ProjectReference Include="..\Modules\Tenancy\Paddock.Modules.Tenancy\Paddock.Modules.Tenancy.csproj" />
+    <ProjectReference Include="..\Modules\Customers\Paddock.Modules.Customers\Paddock.Modules.Customers.csproj" />
+    <ProjectReference Include="..\Modules\Planning\Paddock.Modules.Planning\Paddock.Modules.Planning.csproj" />
+    <ProjectReference Include="..\Modules\Booking\Paddock.Modules.Booking\Paddock.Modules.Booking.csproj" />
+    <ProjectReference Include="..\Modules\Billing\Paddock.Modules.Billing\Paddock.Modules.Billing.csproj" />
+    <ProjectReference Include="..\Modules\Operations\Paddock.Modules.Operations\Paddock.Modules.Operations.csproj" />
+    <ProjectReference Include="..\Modules\Notifications\Paddock.Modules.Notifications\Paddock.Modules.Notifications.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+    <PackageReference Include="Scalar.AspNetCore" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,6 @@
+# Fins de ligne LF dans le dépôt ET dans la copie locale, sur toutes les machines.
+* text=auto eol=lf
+
+# Les scripts Windows exigent CRLF.
+*.cmd text eol=crlf
+*.bat text eol=crlf

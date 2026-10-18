@@ -1,0 +1,41 @@
+<!--
+  Propriétés communes à tous les projets du dépôt. MSBuild importe automatiquement le premier
+  Directory.Build.props trouvé en remontant depuis le dossier du projet.
+  Documentation : https://aka.ms/dotnet/msbuild/customize
+-->
+<Project>
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <!-- Types référence nullables : string ne peut pas être null, string? le peut (≈ strictNullChecks). -->
+    <Nullable>enable</Nullable>
+
+    <!-- Tout avertissement (compilateur, analyseurs, NuGet) fait échouer le build. -->
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+
+    <!-- Règles de qualité CA par défaut de la dernière version ; les règles ciblées se durcissent dans .editorconfig. -->
+    <AnalysisLevel>latest</AnalysisLevel>
+
+    <!-- Les règles de style IDE réglées dans .editorconfig sont aussi vérifiées par dotnet build, pas seulement dans l'éditeur. -->
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+
+    <!--
+      Nécessaire pour que IDE0005 (using inutile) soit signalé au build.
+      CS1591 (membre public sans commentaire XML) est désactivé : la documentation XML n'est pas exigée.
+    -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+
+    <!--
+      Un packages.lock.json par projet (≈ package-lock.json) : versions exactes, dépendances transitives comprises.
+      La CI restaure en "locked-mode" (≈ npm ci) et échoue si un fichier n'est pas à jour.
+    -->
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- API interdites (erreur RS0030) : voir BannedSymbols.txt. -->
+    <AdditionalFiles Include="$(MSBuildThisFileDirectory)BannedSymbols.txt" />
+  </ItemGroup>
+
+</Project>

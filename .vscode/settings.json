@@ -1,0 +1,14 @@
+{
+  "editor.formatOnSave": true,
+  "dotnet.formatting.organizeImportsOnFormat": true,
+  "[csharp]": {
+    "editor.defaultFormatter": "ms-dotnettools.csharp"
+  },
+  "editor.inlayHints.enabled": "onUnlessPressed",
+  "csharp.inlayHints.enableInlayHintsForImplicitVariableTypes": true,
+  "csharp.inlayHints.enableInlayHintsForLambdaParameterTypes": true,
+  "csharp.inlayHints.enableInlayHintsForImplicitObjectCreation": true,
+  "csharp.inlayHints.enableInlayHintsForTypes": true,
+  "dotnet.inlayHints.enableInlayHintsForParameters": true,
+  "editor.semanticHighlighting.enabled": true
+}

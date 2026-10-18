@@ -1,0 +1,15 @@
+P:System.DateTime.Now;Use the injected TimeProvider
+P:System.DateTime.UtcNow;Use the injected TimeProvider
+P:System.DateTime.Today;Use the injected TimeProvider and the organizer's time zone
+P:System.DateTimeOffset.Now;Use the injected TimeProvider
+P:System.DateTimeOffset.UtcNow;Use the injected TimeProvider
+M:System.Threading.Tasks.Task.Wait;Use await instead of blocking on a task
+M:System.Threading.Tasks.Task.Wait(System.Int32);Use await instead of blocking on a task
+M:System.Threading.Tasks.Task.Wait(System.TimeSpan);Use await instead of blocking on a task
+M:System.Threading.Tasks.Task.Wait(System.Threading.CancellationToken);Use await instead of blocking on a task
+M:System.Threading.Tasks.Task.Wait(System.Int32,System.Threading.CancellationToken);Use await instead of blocking on a task
+M:System.Threading.Tasks.Task.Wait(System.TimeSpan,System.Threading.CancellationToken);Use await instead of blocking on a task
+P:System.Threading.Tasks.Task`1.Result;Use await instead of blocking on a task
+P:System.Threading.Tasks.ValueTask`1.Result;Use await instead of blocking on a task
+M:System.Runtime.CompilerServices.TaskAwaiter.GetResult;Use await instead of blocking on a task
+M:System.Runtime.CompilerServices.TaskAwaiter`1.GetResult;Use await instead of blocking on a task

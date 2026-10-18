@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\BuildingBlocks\Paddock.BuildingBlocks\Paddock.BuildingBlocks.csproj" />
+    <ProjectReference Include="..\Paddock.Modules.Operations.Contracts\Paddock.Modules.Operations.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>

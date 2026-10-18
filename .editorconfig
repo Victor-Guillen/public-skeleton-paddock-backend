@@ -1,0 +1,126 @@
+# Fichier racine : l'éditeur ne cherche pas d'autre .editorconfig dans les dossiers parents.
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+indent_size = 2
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.md]
+# En Markdown, deux espaces en fin de ligne forcent un retour à la ligne.
+trim_trailing_whitespace = false
+
+[*.cs]
+indent_size = 4
+
+# Code généré (migrations EF Core, à venir) : exclu de l'analyse de style.
+[**/Migrations/*.cs]
+generated_code = true
+
+[*.cs]
+
+# --- Usings ---
+# System en premier ; un using inutile casse le build (IDE0005).
+dotnet_sort_system_directives_first = true
+dotnet_diagnostic.IDE0005.severity = warning
+
+# --- Namespaces file-scoped : « namespace X; » au lieu de « namespace X { ... } » ---
+csharp_style_namespace_declarations = file_scoped:warning
+dotnet_diagnostic.IDE0161.severity = warning
+
+# --- Modificateurs d'accès toujours explicites : « internal sealed class », jamais « class » seul ---
+dotnet_style_require_accessibility_modifiers = for_non_interface_members:warning
+
+# --- Un champ jamais réassigné doit être readonly ---
+dotnet_style_readonly_field = true:warning
+
+# --- Accolades obligatoires, même pour un if d'une ligne ---
+csharp_prefer_braces = true:warning
+
+# --- Préférences modernes, signalées sans bloquer ---
+csharp_style_var_for_built_in_types = true:suggestion
+csharp_style_var_when_type_is_apparent = true:suggestion
+csharp_style_var_elsewhere = true:suggestion
+csharp_style_prefer_primary_constructors = true:suggestion
+dotnet_style_prefer_collection_expression = when_types_loosely_match:suggestion
+csharp_style_prefer_switch_expression = true:suggestion
+
+# --- Analyseur de qualité ciblé ---
+# Un CancellationToken reçu doit être transmis aux méthodes qui l'acceptent.
+dotnet_diagnostic.CA2016.severity = warning
+
+# --- Nommage ---
+# IDE1006 : sans cette ligne, les règles ci-dessous ne sont signalées que dans l'éditeur, pas par dotnet build.
+dotnet_diagnostic.IDE1006.severity = warning
+
+# Styles
+dotnet_naming_style.pascal_case.capitalization = pascal_case
+
+dotnet_naming_style.camel_case.capitalization = camel_case
+
+dotnet_naming_style.underscore_camel_case.required_prefix = _
+dotnet_naming_style.underscore_camel_case.capitalization = camel_case
+
+dotnet_naming_style.i_pascal_case.required_prefix = I
+dotnet_naming_style.i_pascal_case.capitalization = pascal_case
+
+dotnet_naming_style.t_pascal_case.required_prefix = T
+dotnet_naming_style.t_pascal_case.capitalization = pascal_case
+
+# Types et membres : PascalCase.
+dotnet_naming_symbols.types_and_members.applicable_kinds = namespace, class, struct, interface, enum, delegate, property, method, event, local_function
+dotnet_naming_rule.types_and_members_are_pascal_case.symbols = types_and_members
+dotnet_naming_rule.types_and_members_are_pascal_case.style = pascal_case
+dotnet_naming_rule.types_and_members_are_pascal_case.severity = warning
+
+# Interfaces : préfixe I.
+dotnet_naming_symbols.interfaces.applicable_kinds = interface
+dotnet_naming_rule.interfaces_start_with_i.symbols = interfaces
+dotnet_naming_rule.interfaces_start_with_i.style = i_pascal_case
+dotnet_naming_rule.interfaces_start_with_i.severity = warning
+
+# Paramètres de type générique : préfixe T.
+dotnet_naming_symbols.type_parameters.applicable_kinds = type_parameter
+dotnet_naming_rule.type_parameters_start_with_t.symbols = type_parameters
+dotnet_naming_rule.type_parameters_start_with_t.style = t_pascal_case
+dotnet_naming_rule.type_parameters_start_with_t.severity = warning
+
+# Constantes (champs et locales) : PascalCase.
+dotnet_naming_symbols.constants.applicable_kinds = field, local
+dotnet_naming_symbols.constants.required_modifiers = const
+dotnet_naming_rule.constants_are_pascal_case.symbols = constants
+dotnet_naming_rule.constants_are_pascal_case.style = pascal_case
+dotnet_naming_rule.constants_are_pascal_case.severity = warning
+
+# Constantes privées : PascalCase. Règle nécessaire car Roslyn compare d'abord l'accessibilité :
+# sans elle, la règle des champs privés (_camelCase) l'emporterait sur celle des constantes.
+dotnet_naming_symbols.private_constants.applicable_kinds = field
+dotnet_naming_symbols.private_constants.applicable_accessibilities = private, private_protected
+dotnet_naming_symbols.private_constants.required_modifiers = const
+dotnet_naming_rule.private_constants_are_pascal_case.symbols = private_constants
+dotnet_naming_rule.private_constants_are_pascal_case.style = pascal_case
+dotnet_naming_rule.private_constants_are_pascal_case.severity = warning
+
+# Champs statiques readonly non privés : PascalCase (ex. public static readonly Error NotFound).
+dotnet_naming_symbols.static_readonly_fields.applicable_kinds = field
+dotnet_naming_symbols.static_readonly_fields.applicable_accessibilities = public, internal, protected, protected_internal
+dotnet_naming_symbols.static_readonly_fields.required_modifiers = static, readonly
+dotnet_naming_rule.static_readonly_fields_are_pascal_case.symbols = static_readonly_fields
+dotnet_naming_rule.static_readonly_fields_are_pascal_case.style = pascal_case
+dotnet_naming_rule.static_readonly_fields_are_pascal_case.severity = warning
+
+# Champs privés (statiques ou non) : _camelCase.
+dotnet_naming_symbols.private_fields.applicable_kinds = field
+dotnet_naming_symbols.private_fields.applicable_accessibilities = private, private_protected
+dotnet_naming_rule.private_fields_are_underscore_camel_case.symbols = private_fields
+dotnet_naming_rule.private_fields_are_underscore_camel_case.style = underscore_camel_case
+dotnet_naming_rule.private_fields_are_underscore_camel_case.severity = warning
+
+# Paramètres et variables locales : camelCase.
+dotnet_naming_symbols.locals_and_parameters.applicable_kinds = parameter, local
+dotnet_naming_rule.locals_and_parameters_are_camel_case.symbols = locals_and_parameters
+dotnet_naming_rule.locals_and_parameters_are_camel_case.style = camel_case
+dotnet_naming_rule.locals_and_parameters_are_camel_case.severity = warning

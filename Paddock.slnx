@@ -1,0 +1,44 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Paddock.Api/Paddock.Api.csproj" />
+    <Project Path="src/Paddock.AppHost/Paddock.AppHost.csproj" />
+    <Project Path="src/Paddock.ServiceDefaults/Paddock.ServiceDefaults.csproj" />
+  </Folder>
+  <Folder Name="/src/BuildingBlocks/">
+    <Project Path="src/BuildingBlocks/Paddock.BuildingBlocks/Paddock.BuildingBlocks.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/" />
+  <Folder Name="/src/Modules/Billing/">
+    <Project Path="src/Modules/Billing/Paddock.Modules.Billing/Paddock.Modules.Billing.csproj" />
+    <Project Path="src/Modules/Billing/Paddock.Modules.Billing.Contracts/Paddock.Modules.Billing.Contracts.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Booking/">
+    <Project Path="src/Modules/Booking/Paddock.Modules.Booking/Paddock.Modules.Booking.csproj" />
+    <Project Path="src/Modules/Booking/Paddock.Modules.Booking.Contracts/Paddock.Modules.Booking.Contracts.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Customers/">
+    <Project Path="src/Modules/Customers/Paddock.Modules.Customers/Paddock.Modules.Customers.csproj" />
+    <Project Path="src/Modules/Customers/Paddock.Modules.Customers.Contracts/Paddock.Modules.Customers.Contracts.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Notifications/">
+    <Project Path="src/Modules/Notifications/Paddock.Modules.Notifications/Paddock.Modules.Notifications.csproj" />
+    <Project Path="src/Modules/Notifications/Paddock.Modules.Notifications.Contracts/Paddock.Modules.Notifications.Contracts.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Operations/">
+    <Project Path="src/Modules/Operations/Paddock.Modules.Operations/Paddock.Modules.Operations.csproj" />
+    <Project Path="src/Modules/Operations/Paddock.Modules.Operations.Contracts/Paddock.Modules.Operations.Contracts.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Planning/">
+    <Project Path="src/Modules/Planning/Paddock.Modules.Planning/Paddock.Modules.Planning.csproj" />
+    <Project Path="src/Modules/Planning/Paddock.Modules.Planning.Contracts/Paddock.Modules.Planning.Contracts.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Tenancy/">
+    <Project Path="src/Modules/Tenancy/Paddock.Modules.Tenancy/Paddock.Modules.Tenancy.csproj" />
+    <Project Path="src/Modules/Tenancy/Paddock.Modules.Tenancy.Contracts/Paddock.Modules.Tenancy.Contracts.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Paddock.ArchitectureTests/Paddock.ArchitectureTests.csproj" />
+    <Project Path="tests/Paddock.IntegrationTests/Paddock.IntegrationTests.csproj" />
+    <Project Path="tests/Paddock.UnitTests/Paddock.UnitTests.csproj" />
+  </Folder>
+</Solution>

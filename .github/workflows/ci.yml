@@ -1,0 +1,70 @@
+# Intégration continue : format, build Release (warnings = erreurs), tests, rapports de tests.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# Droits minimaux : le workflow lit le dépôt, il ne peut rien y écrire.
+permissions:
+  contents: read
+
+# Un nouveau push sur la même branche annule l'exécution encore en cours.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  # Même version que Aspire.AppHost.Sdk (src/Paddock.AppHost/Paddock.AppHost.csproj).
+  ASPIRE_CLI_VERSION: 13.6.1
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      # SDK défini par global.json ; cache NuGet indexé sur les packages.lock.json.
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: global.json
+          cache: true
+          cache-dependency-path: "**/packages.lock.json"
+
+      # AspireUseCliBundle=true : la compilation de l'AppHost cherche la commande « aspire » dans le PATH (ASPIRE009).
+      - name: Install Aspire CLI
+        run: |
+          dotnet tool install --global Aspire.Cli --version "$ASPIRE_CLI_VERSION"
+          echo "$HOME/.dotnet/tools" >> "$GITHUB_PATH"
+
+      # ≈ npm ci : versions exactes des packages.lock.json, échec si un fichier n'est pas à jour.
+      - name: Restore
+        run: dotnet restore --locked-mode
+
+      - name: Check formatting
+        run: dotnet format --verify-no-changes --no-restore
+
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Test
+        run: >-
+          dotnet test --configuration Release --no-build
+          --results-directory "${{ github.workspace }}/TestResults"
+          --report-xunit-trx --report-xunit-html
+
+      # always() : les rapports sont publiés surtout quand des tests échouent.
+      - name: Upload test reports
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: test-reports
+          path: TestResults/
+          if-no-files-found: warn
